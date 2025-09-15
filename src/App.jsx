@@ -10,7 +10,7 @@ import Dashboard from "./components/Dashboard";
 import DashboardHome from "./components/DashboardHome";
 import ProjectSubmission from "./components/ProjectSubmission";
 import MyProjects from "./components/MyProjects";
-import MRVReview from "./components/MRVreview";
+import MRVReview from "./components/MRVReview";
 import Marketplace from "./components/MarketPlace";
 
 export default function App() {
