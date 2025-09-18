@@ -38,7 +38,7 @@ export default function App() {
           <Route index element={<DashboardHome />} />
           <Route path="projects" element={<OngoingProjects />} />
           <Route path="mrv-review" element={<MRVReview />} />
-          <Route path="marketplace" element={<Marketplace />} />
+          <Route path="marketplace" element={<MarketPlace />} />
           <Route path="credit-management" element={<CreditManagement />} />
           <Route path="ai-verification" element={<AIVerification />} />
           <Route path="profile" element={<Profile />} /> 
