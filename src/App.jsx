@@ -8,36 +8,40 @@ import AuthPage from "./components/AuthPage";
 // Dashboard files
 import Dashboard from "./components/Dashboard";
 import DashboardHome from "./components/DashboardHome";
-import ProjectSubmission from "./components/ProjectSubmission";
-import MyProjects from "./components/MyProjects";
+import OngoingProjects from "./components/OngoingProjects";
 import MRVReview from "./components/MRVReview";
-import Marketplace from "./components/MarketPlace";
+import Marketplace from "./components/Marketplace";
+import CreditManagement from "./components/CreditManagement";
+import AIVerification from "./components/AIVerification";
+import Profile from "./components/Profile"; 
+
+// Protected route
+import ProtectedRoute from "./components/ProtectedRoute";
 
 export default function App() {
   return (
     <Router>
       <Routes>
-        {/* Landing Page */}
+        {/* Public Routes */}
         <Route path="/" element={<LandingPage />} />
-
-        {/* Authentication Page */}
         <Route path="/auth" element={<AuthPage />} />
 
-        {/* Dashboard with nested routes */}
-        <Route path="/dashboard" element={<Dashboard />}>
-          {/* Default dashboard home */}
+        {/* Protected Dashboard */}
+        <Route
+          path="/dashboard"
+          element={
+            <ProtectedRoute>
+              <Dashboard />
+            </ProtectedRoute>
+          }
+        >
           <Route index element={<DashboardHome />} />
-
-          {/* Project submission page */}
-          <Route path="submit" element={<ProjectSubmission />} />
-
-          {/* My Projects page */}
-          <Route path="projects" element={<MyProjects />} />
-
-          {/* MRV Review page */}
+          <Route path="projects" element={<OngoingProjects />} />
           <Route path="mrv-review" element={<MRVReview />} />
-          {/* Marketplace page */}
           <Route path="marketplace" element={<Marketplace />} />
+          <Route path="credit-management" element={<CreditManagement />} />
+          <Route path="ai-verification" element={<AIVerification />} />
+          <Route path="profile" element={<Profile />} /> 
         </Route>
       </Routes>
     </Router>

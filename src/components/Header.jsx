@@ -1,17 +1,10 @@
 import React, { useState, useEffect } from "react";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 import { FaBars, FaTimes } from "react-icons/fa";
-import { Link as ScrollLink } from "react-scroll";
 
 export default function Header({ onHowItWorksClick }) {
   const [menuOpen, setMenuOpen] = useState(false);
   const [scrolled, setScrolled] = useState(false);
-  const navigate = useNavigate();
-
-  const openAuth = (mode = "login") => {
-    navigate(`/auth?mode=${mode}`);
-    setMenuOpen(false);
-  };
 
   useEffect(() => {
     const handleScroll = () => setScrolled(window.scrollY > 50);
@@ -21,9 +14,9 @@ export default function Header({ onHowItWorksClick }) {
 
   return (
     <nav
-      className={`fixed top-0 left-0 w-full z-50 transition-all duration-300 ${
+      className={`fixed top-0 left-0 w-full z-50 transition-all duration-500 ${
         scrolled
-          ? "bg-gradient-to-r from-sky-600 via-cyan-600 to-teal-600 shadow-md"
+          ? "bg-slate-950/90 backdrop-blur-lg border-b border-slate-800 shadow-lg"
           : "bg-transparent"
       }`}
     >
@@ -31,64 +24,31 @@ export default function Header({ onHowItWorksClick }) {
         {/* Logo */}
         <Link
           to="/"
-          className={`text-3xl font-extrabold tracking-wide ${
-            scrolled ? "text-white" : "text-white"
-          }`}
+          className="text-3xl font-extrabold bg-gradient-to-r from-sky-400 to-cyan-400 bg-clip-text text-transparent tracking-wide"
         >
-          Jal<span className="text-yellow-300">Nidhi</span>
+          🌊 JalNidhi
         </Link>
 
         {/* Desktop Nav */}
-        <div
-          className={`hidden md:flex gap-10 text-lg font-medium ${
-            scrolled ? "text-white" : "text-white"
-          }`}
-        >
-          <ScrollLink
-            to="features"
-            smooth={true}
-            duration={600}
-            offset={-80}
-            className="cursor-pointer hover:text-yellow-300 hover:underline transition"
+        <div className="hidden md:flex gap-10 text-lg font-medium text-gray-300">
+          <a
+            href="#features"
+            className="hover:text-sky-400 hover:underline transition"
           >
             Features
-          </ScrollLink>
+          </a>
 
           <button
-            onClick={(e) => {
-              e.preventDefault();
-              onHowItWorksClick();
-              setMenuOpen(false);
-            }}
-            className="hover:text-yellow-300 hover:underline transition"
+            onClick={onHowItWorksClick}
+            className="hover:text-sky-400 hover:underline transition cursor-pointer"
           >
-            How it works
-          </button>
-
-          <Link to="/dashboard" className="hover:text-yellow-300 hover:underline transition">
-            Dashboard
-          </Link>
-        </div>
-
-        {/* Auth buttons */}
-        <div className="hidden md:flex gap-4">
-          <button
-            onClick={() => openAuth("login")}
-            className="px-5 py-2 rounded-full border-2 border-yellow-300 text-yellow-300 font-semibold hover:bg-yellow-300 hover:text-sky-900 transition"
-          >
-            Login
-          </button>
-          <button
-            onClick={() => openAuth("signup")}
-            className="px-5 py-2 rounded-full bg-yellow-300 text-sky-900 font-bold hover:bg-yellow-400 transition shadow-md hover:shadow-lg"
-          >
-            Sign Up
+            How it Works
           </button>
         </div>
 
         {/* Mobile Menu Button */}
         <button
-          className="md:hidden text-white text-2xl"
+          className="md:hidden text-gray-300 text-2xl"
           onClick={() => setMenuOpen(!menuOpen)}
         >
           {menuOpen ? <FaTimes /> : <FaBars />}
@@ -97,50 +57,18 @@ export default function Header({ onHowItWorksClick }) {
 
       {/* Mobile Dropdown */}
       {menuOpen && (
-        <div className="md:hidden bg-sky-700 text-white px-6 py-4 space-y-4 shadow-lg">
-          <ScrollLink
-            to="features"
-            smooth={true}
-            duration={600}
-            offset={-80}
-            className="block cursor-pointer hover:text-yellow-300"
-            onClick={() => setMenuOpen(false)}
-          >
+        <div className="md:hidden bg-slate-900 text-gray-300 px-6 py-4 space-y-4 shadow-lg">
+          <a href="#features" className="block hover:text-sky-400">
             Features
-          </ScrollLink>
-
+          </a>
           <button
-            onClick={(e) => {
-              e.preventDefault();
+            onClick={() => {
               onHowItWorksClick();
               setMenuOpen(false);
             }}
-            className="block hover:text-yellow-300"
+            className="block hover:text-sky-400"
           >
-            How it works
-          </button>
-
-          <Link
-            to="/dashboard"
-            className="block hover:text-yellow-300"
-            onClick={() => setMenuOpen(false)}
-          >
-            Dashboard
-          </Link>
-
-          <hr className="border-sky-400/50" />
-
-          <button
-            onClick={() => openAuth("login")}
-            className="w-full text-left hover:text-yellow-300"
-          >
-            Login
-          </button>
-          <button
-            onClick={() => openAuth("signup")}
-            className="w-full text-left hover:text-yellow-300"
-          >
-            Sign Up
+            How it Works
           </button>
         </div>
       )}

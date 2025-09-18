@@ -8,12 +8,12 @@ import Footer from "./Footer";
 export default function LandingPage() {
   const [showHowItWorks, setShowHowItWorks] = useState(false);
 
-  const handleShowHowItWorks = (e) => {
-    if (e?.preventDefault) e.preventDefault();
-
+  const handleToggleHowItWorks = (e) => {
+    e.preventDefault();
     setShowHowItWorks((prev) => {
       const next = !prev;
       if (next) {
+        // Delay so the section mounts first
         setTimeout(() => {
           document
             .getElementById("how-it-works-section")
@@ -25,8 +25,9 @@ export default function LandingPage() {
   };
 
   return (
-    <div className="font-sans text-gray-900 antialiased">
-      <Header onHowItWorksClick={handleShowHowItWorks} />
+    <div className="font-sans text-gray-200 bg-slate-950">
+      <Header onHowItWorksClick={handleToggleHowItWorks} />
+
       <div>
         <Hero />
         <Features />
